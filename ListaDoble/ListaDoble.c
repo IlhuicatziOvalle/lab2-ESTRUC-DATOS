@@ -41,6 +41,21 @@ void PushBack(ListaDoble *lista, void *dato){
     lista->Tail = nuevo;
     lista->size++;
 }
+
+void ImprimirLista(ListaDoble *lista, void (*func)(void *)) {
+    Nodo *actual = lista->Head;
+    while (actual != NULL) {
+        func(actual->data);
+        actual = actual->next;
+    }
+    printf("\n");
+}
+
+void imprimirComentario(void *data) {
+    Blog *blog = (Blog *)data;
+    printf("Usuario: %s, Comentario: %s\n", blog->usuario, blog->comentario);
+}
+
 Nodo *GetNodoPos(ListaDoble *lista, int pos){
     Nodo *temp=lista->Head;
 
@@ -71,21 +86,13 @@ void PushPos(ListaDoble *lista,void *dato, int pos){
 }
 
 
-void ImprimirLista(ListaDoble lista, void (*func)(void *)){     ///void(*func)(void*) se lo dejas al usario para que cree su funcion para el tipo de dato
-    lista.Curr=lista.Head;
-    while(lista.Curr!=NULL){
-        func(lista.Curr->data);
-        lista.Curr=lista.Curr->next;
+void ImprimirAlrevez(ListaDoble *lista, void (*func)(void *)) {
+    lista->Curr = lista->Tail;
+    while (lista->Curr != NULL) {
+        func(lista->Curr->data);
+        lista->Curr = lista->Curr->prev;
     }
 }
-void ImprimirAlrevez(ListaDoble lista,void (*func)(void *)){
-    lista.Curr=lista.Tail;
-    while(lista.Curr!=NULL){
-        func(lista.Curr->data);
-        lista.Curr=lista.Curr->prev;
-    }
-}
-
 void LiberarLista(ListaDoble *lista) {
     lista->Curr = lista->Head;
     while (lista->Curr != NULL) {
