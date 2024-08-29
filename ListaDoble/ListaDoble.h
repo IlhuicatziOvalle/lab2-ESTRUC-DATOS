@@ -25,13 +25,18 @@ void PushBack(ListaDoble *lista, void *dato);
 Nodo *GetNodoPos(ListaDoble *lista, int pos);
 void PushPos(ListaDoble *lista,void *dato, int pos);
 
-void ImprimirLista(ListaDoble lista, void (*func)(void *));
+void ImprimirLista(ListaDoble *lista, void (*func)(void *));
 
 void LiberarLista(ListaDoble *lista);
 
 void BorrarNodo(ListaDoble *lista,void *dato);
 void generarComentarioAleatoria(char *cadena, int longitud);
 void generarBlogAleatorio(Blog *blog);
+void OrdenadoPorLongitud(ListaDoble *listaOrdenada, Blog *nuevoBlog);
+void ListaMenoresA20Letras(ListaDoble *listaOriginal, ListaDoble *listaFiltrada);
+
+void ImprimirAlrevez(ListaDoble *lista, void (*func)(void *));
+void imprimirComentario(void *data);
 void OrdenadoPorLongitud(ListaDoble *listaOrdenada, Blog *nuevoBlog);
 void ListaMenoresA20Letras(ListaDoble *listaOriginal, ListaDoble *listaFiltrada);
 
