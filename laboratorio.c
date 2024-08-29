@@ -1,18 +1,8 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
-#include "ListaDoble/ListaDoble.h"
-
-void ImprimirNumeros(void *dato){
-    printf("%c", *(char *)dato);
-}
-void imprimirComentario(void *data){
-    Blog *blog = (Blog*)data;
-    printf("\nUsuario: %s\n", blog->usuario);
-    printf("Comentario: %s\n", blog->comentario);
-   
-}
+#include "ListaDoble/ListaDoble.h"  // Asegúrate de que este archivo incluya las declaraciones necesarias
 
 
 int main() {
@@ -21,6 +11,7 @@ int main() {
     ListaDoble listaComentarios;
     InicializarListaDoble(&listaComentarios);
 
+    // Generar 100 comentarios aleatorios
     for (int i = 0; i < 100; i++) {
         Blog *nuevoBlog = (Blog *)malloc(sizeof(Blog));
         generarBlogAleatorio(nuevoBlog);
@@ -32,9 +23,12 @@ int main() {
             PushBack(&listaComentarios, nuevoBlog);
         }
     }
-    printf("\nComentarios Original:\n");
-    ImprimirLista(listaComentarios, imprimirComentario);
 
+    // Imprimir la lista original de comentarios
+    printf("\nComentarios Original:\n");
+    ImprimirLista(&listaComentarios, imprimirComentario);
+
+    // Crear y llenar la lista ordenada por longitud
     ListaDoble listaLongitud;
     InicializarListaDoble(&listaLongitud);
     Nodo *temp = listaComentarios.Head;
@@ -46,23 +40,28 @@ int main() {
         temp = temp->next;
     }
 
+    // Crear y llenar la lista con comentarios de 20 letras o menos
     ListaDoble listaCortos;
     InicializarListaDoble(&listaCortos);
     ListaMenoresA20Letras(&listaComentarios, &listaCortos);
 
+    // Imprimir la lista ordenada por longitud
     printf("\nLista de comentarios ordenada por longitud:\n");
-    ImprimirLista(listaLongitud, imprimirComentario);
+    ImprimirLista(&listaLongitud, imprimirComentario);
 
+    // Imprimir la lista de comentarios con 20 letras o menos
     printf("\nLista de comentarios con 20 letras o menos:\n");
-    ImprimirLista(listaCortos, imprimirComentario);
+    ImprimirLista(&listaCortos, imprimirComentario);
 
-    printf("\nLista de comentarios alrevez");
-    ImprimirAlrevez(listaComentarios, imprimirComentario);
+    // Imprimir la lista de comentarios al revés
+    printf("\nLista de comentarios al revés:\n");
+    ImprimirAlrevez(&listaComentarios, imprimirComentario);
 
-
+    // Liberar la memoria de todas las listas
     LiberarLista(&listaComentarios);
     LiberarLista(&listaLongitud);
     LiberarLista(&listaCortos);
 
     return 0;
 }
+
