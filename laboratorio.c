@@ -31,7 +31,7 @@ int main() {
     // Crear y llenar la lista ordenada por longitud
     ListaDoble listaLongitud;
     InicializarListaDoble(&listaLongitud);
-    Nodo *temp = listaComentarios.Head;
+    NodoDoble *temp = listaComentarios.Head;
     while (temp != NULL) {
         Blog *nuevoBlog = (Blog *)malloc(sizeof(Blog));
         strcpy(nuevoBlog->usuario, temp->data->usuario);
@@ -57,11 +57,19 @@ int main() {
     printf("\nLista de comentarios al revés:\n");
     ImprimirAlrevez(&listaComentarios, imprimirComentario);
 
+    // Eliminar los comentarios con usuarios de más de 3 letras
+    EliminarComentariosLargos(&listaComentarios);
+
+    // Imprimir la lista original de comentarios después de la eliminación
+    printf("\nComentarios Original Después de Eliminar Usuarios Largos:\n");
+    ImprimirLista(&listaComentarios, imprimirComentario);
+ 
+
     // Liberar la memoria de todas las listas
     LiberarLista(&listaComentarios);
     LiberarLista(&listaLongitud);
     LiberarLista(&listaCortos);
+    
 
     return 0;
 }
-

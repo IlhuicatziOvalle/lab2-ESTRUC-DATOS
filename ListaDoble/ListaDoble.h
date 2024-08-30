@@ -4,41 +4,36 @@ typedef struct _BLOG{
     char comentario[255]; 
 }Blog;
 
-typedef struct _Nodo{
+typedef struct _NodoDoble{
     Blog *data;
-    struct _Nodo *next;
-    struct _Nodo *prev;
-}Nodo;
+    struct _NodoDoble *next;
+    struct _NodoDoble *prev;
+}NodoDoble;
 
-typedef struct _lista{
-    Nodo *Head;
-    Nodo *Tail;
-    Nodo *Curr;
+typedef struct _ListaDoble{
+    NodoDoble *Head;
+    NodoDoble *Tail;
+    NodoDoble *Curr;
     int size;
 } ListaDoble;
 
 
 
+
 void InicializarListaDoble(ListaDoble *lista);
-void PushFront(ListaDoble *lista, void *dato);
-void PushBack(ListaDoble *lista, void *dato);
-Nodo *GetNodoPos(ListaDoble *lista, int pos);
-void PushPos(ListaDoble *lista,void *dato, int pos);
-
+void PushFront(ListaDoble *lista, Blog *dato);
+void PushBack(ListaDoble *lista, Blog *dato);
+NodoDoble *GetNodoPos(ListaDoble *lista, int pos);
+void PushPos(ListaDoble *lista, Blog *dato, int pos);
+int BorrarPos(ListaDoble *lista, int pos);
 void ImprimirLista(ListaDoble *lista, void (*func)(void *));
-
 void LiberarLista(ListaDoble *lista);
 
-void BorrarNodo(ListaDoble *lista,void *dato);
+
+void imprimirComentario(void *data);
+void ImprimirAlrevez(ListaDoble *lista, void (*func)(void *));
 void generarComentarioAleatoria(char *cadena, int longitud);
 void generarBlogAleatorio(Blog *blog);
 void OrdenadoPorLongitud(ListaDoble *listaOrdenada, Blog *nuevoBlog);
 void ListaMenoresA20Letras(ListaDoble *listaOriginal, ListaDoble *listaFiltrada);
-
-void ImprimirAlrevez(ListaDoble *lista, void (*func)(void *));
-void imprimirComentario(void *data);
-void OrdenadoPorLongitud(ListaDoble *listaOrdenada, Blog *nuevoBlog);
-void ListaMenoresA20Letras(ListaDoble *listaOriginal, ListaDoble *listaFiltrada);
-
-void ImprimirAlrevez(ListaDoble lista,void (*func)(void *));
-
+void EliminarComentariosLargos(ListaDoble *lista);
